@@ -1,0 +1,40 @@
+<%- include('../Admin/adminlayout.ejs') %>
+<%- include('../Admin/adminHeader.ejs') %>
+
+   
+  <div class="container">
+    <div class="row" style=>
+        <div class="col-md-4" style="width: 100%;">
+    <table class="table pt-5" >
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>OrderId</th>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Total Price</th>
+                <th>Payment Method</th>
+                <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% result.forEach(function(result,index){%>
+              <tr>
+                <td><%=index +1%></td>
+                <td><%=result._id%></td>
+                <td><%=result.Date%></td>
+                <td><%=result.Address[0].Firstname%></td>
+                <td><%=result.totalPrice%></td>
+                <td><%=result.paymentMode%></td>
+                <td><%=result.paymentStatus%></td>
+              </tr>
+            <%})%>
+                                    
+          </tbody>
+      </table>
+    </div>
+</div>
+</div>
+
+   
+   

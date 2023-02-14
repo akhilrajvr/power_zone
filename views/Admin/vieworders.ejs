@@ -1,0 +1,218 @@
+ <%- include('../Admin/adminlayout.ejs') %>
+<%- include('../Admin/adminHeader.ejs') %>
+
+
+ <div class="container" style="width: 100%;">
+<div class="main-panel " style="width: 100%;">
+<div class="content-wrapper"  style="width: 100%;">
+<div class="row" style="display:block;"  style="width: 100%;">
+<div class="col-lg-6 grid-margin stretch-card "  style="width: 100%;">
+<div class="userdiv" style="width: 100%;">
+<div class="container mt-5 mb-5"  style="width: 100%;"> 
+
+ <div class="row d-flex justify-content-center" style="width: 100%;">
+
+<div class="col-md-8" style="width: 100%;">
+
+<div class="card" style="width: 100%;">
+
+<div class="invoice p-5" style="width: 100%;">
+ <div class="d-flex">
+<%if(result[0].paymentStatus=="Pending"){%>
+<h5>Order Pending</h5>
+<%}else if(result[0].paymentStatus=="Placed"){%>
+<h5>Order Placed</h5>
+<%}else if(result[0].paymentStatus==="Shipped"){%>
+<h5>Order Shipped</h5>
+<%}else if(result[0].paymentStatus==="Delivered"){%>
+<h5>Order Delivered</h5>
+<%}%>
+ <!-- <!- <div class="dropdown mx-5" >
+<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<%=result[0].paymentStatus%>
+</button>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<a class="dropdown-item" href="/Admin/placeOrder/<%=result[0].id%>">Placed</a>
+<a class="dropdown-item" href="/Admin/shippedOrder/<%=result[0].id%>">Shipped</a>
+<a class="dropdown-item" href="/Admin/deliveredOrder/<%=result[0].id%>">Delivered</a>
+<a class="dropdown-item" href="/Admin/cancelledOrder/<%=result[0].id%>">Cancelled</a>
+</div>
+</div>  -->
+<div class="dropdown"style="margin-boottom 20px">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <%=result[0].paymentStatus%>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1 position-fixed">
+      <li><a class="dropdown-item" href="/Admin/placeOrder/<%=result[0].id%>">Placed</a></li>
+      <li><a class="dropdown-item" href="/Admin/shippedOrder/<%=result[0].id%>">Shipped</a></li>
+      <li><a class="dropdown-item" href="/Admin/deliveredOrder/<%=result[0].id%>">Delivered</a></li>
+      <li><a class="dropdown-item" href="/Admin/cancelledOrder/<%=result[0].id%>">Cancelled</a></li>
+    </ul>
+  </div>
+</div> 
+
+
+
+
+
+
+<span>Customer Name : <%=result[0].Address[0].Firstname%></span>
+
+<div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+
+<table class="table table-borderless">
+
+<tbody>
+<tr>
+<td>
+<div class="py-2">
+
+<span class="d-block text-muted mb-2">Order Date</span>
+<span>12 Jan,2018</span>
+
+</div>
+</td>
+
+<td>
+<div class="py-2">
+
+<span class="d-block text-muted mb-2">Order ID</span>
+<span><%=result[0]._id%></span>
+
+</div>
+</td>
+
+<td>
+<div class="py-2">
+
+<span class="d-block text-muted mb-2">Payment</span>
+<span class="mt-2"><%=result[0].paymentMode%></span>
+
+</div>
+</td>
+
+<td>
+<div class="py-2">
+
+<span class="d-block text-muted mb-2">Shipping Address</span>
+<span><%=result[0].Address[0].Address%>,<%=result[0].Address[0].District%><br><%=result[0].Address[0].State%>,<%=result[0].Address[0].Post%></span>
+
+</div>
+</td>
+</tr>
+</tbody>
+
+</table>
+</div>
+<div class="product border-bottom table-responsive">
+
+<table class="table table-borderless">
+
+<tbody>
+<% for(let i=0;i < result[0].Products.length;i++){%>
+<tr>
+
+<td width="20%">
+
+<img src="/images/<%=result[0].Products[i].productImg[0]%>" width="90">
+
+</td>
+
+<td width="60%">
+<span class="font-weight-bold "><%=result[0].Products[i].productname%></span>
+<div class="product-qty mt-2">
+<span class="d-block">Quantity : <%=result[0].Products[i].quantity%></span>
+<span class="d-block">Price : <%=result[0].Products[i].price%></span>
+</div>
+</td>
+<td width="20%">
+<div class="text-right">
+<span class="font-weight-bold"><%=result[0].Products[i].quantity*result[0].Products[i].price%></span>
+</div>
+</td>                                                   
+</tr>
+<%}%>                             
+</tbody> 
+
+</table>
+</div>
+<div class="row">
+
+<div class="col-12 d-flex justify-content-end">
+<div class="col-5 ">
+
+<table class="table table-borderless">
+
+<tbody class="totals">
+
+<tr>
+<td>
+<div class="text-left">
+
+<span class="text-muted">Subtotal</span>
+
+</div>
+</td>
+<td>
+<div class="text-right">
+<span><%=result[0].totalPrice%></span>
+</div>
+</td>
+</tr>
+
+
+
+<tr>
+<td>
+<div class="text-left">
+
+<span class="text-muted">Discount</span>
+
+</div>
+</td>
+<td>
+<div class="text-right">
+<span class="text-success">0.00</span>
+</div>
+</td>
+</tr>
+
+
+<tr class="border-top border-bottom">
+<td>
+<div class="text-left">
+
+<span class="font-weight-bold">Total</span>
+
+</div>
+</td>
+<td>
+<div class="text-right">
+<span class="font-weight-bold"><%=result[0].totalPrice%></span>
+</div>
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div> -->
+
+
+
+

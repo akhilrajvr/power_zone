@@ -1,0 +1,231 @@
+<%- include('../User/layout.ejs') %>
+<%- include('../User/userheader.ejs') %>
+
+	<! <div class="page-info-section page-info">
+		<div class="container">
+			<div class="site-breadcrumb">
+				<a href="/viewaddress">Address mangement</a> / 
+				<a href="">Sales</a> / 
+				<a href="">Bags</a> / 
+				<a href="">Cart</a> / 
+			
+			</div>
+			<img src="img/page-info-art.png" alt="" class="page-info-art">
+		</div>
+	</div>
+	<!-- Page Info end -->
+
+
+	<!-- Page -->
+	 <!-- <div class="page-area cart-page spad">
+		<div class="container">
+			<form class="checkout-form">
+				<div class="row">
+					<div class="col-lg-6">
+						<h4 class="checkout-title">My Profile</h4>
+						<div class="row">
+							
+							<div class="col-md-6">
+								<input type="text" placeholder="First Name *" value="<%=user.Firstname%>">
+							</div>
+							<div class="col-md-6">
+								<input type="text" placeholder="Last Name *" value="<%=user. Lastname%>">
+							</div>
+							<div class="col-md-12">
+								
+					       <input type="text" placeholder="Phone no *" value="<%=user.Phone%>">
+				           <input type="email" placeholder="Email Address *" value="<%=user.email%>">
+							
+							</div>
+						</div>
+					</div>
+					
+				</div> -->
+				<div class="container py-5">
+					<div class="row">
+				<div class="col-lg-4">
+					<div class="card mb-4">
+					  <div class="card-body text-center">
+						<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+						  class="rounded-circle img-fluid" style="width: 150px;">
+						<h5 class="my-3"><%=user.Fullname%></h5>
+						<div class="d-flex justify-content-center mb-2">
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  
+				
+					<div class="card mb-4">
+					  <div class="card-body">
+						
+						<form action="/updateprofile" method="post">
+						<div class="row">
+						  <div class="col-sm-3">
+							<p class="mb-0">Name</p>
+						  </div>
+						  <div class="col-sm-9">
+							<input class="text-muted mb-0" name="firstname"  value="<%=user.Firstname%>">
+						  </div>
+						</div>
+						<hr style="margin: 15px;">
+						<div class="row">
+						  <div class="col-sm-3">
+							<p class="mb-0">Email</p>
+						  </div>
+						  <div class="col-sm-9">
+							  <input class="text-muted mb-0" name="email" value="<%=user.email%>">
+						  </div>
+						</div>
+						<hr style="margin: 15px;">
+						<div class="row">
+						  <div class="col-sm-3">
+							<p class="mb-0">Phone</p>
+						  </div>
+						  <div class="col-sm-9">
+							  <input class="text-muted mb-0" name="phone" value="<%=user.Phone%>">
+						  </div>
+		  
+						</div>
+						</div>
+					</div>
+				 </form>
+				
+				</div>	
+				   <!-- Button trigger modal -->
+				   <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+	Add
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		    <form action="/addaddress" method="post">
+				<div class="row mt-3">
+				  <div class="col-sm-3">
+					<p class="mb-0">Address</p>
+				  </div>
+				  <div class="col-sm-9">
+					  <input class="text-muted mb-0" name="address" placeholder="Address">
+				  </div>
+				</div>
+		
+			
+		
+				<div class="row mt-3">
+				  <div class="col-sm-3">
+					<p class="mb-0">Phone</p>
+				  </div>
+				  <div class="col-sm-9">
+					  <input class="text-muted mb-0" name="phone" placeholder="Phone">
+				  </div>
+				</div>
+		
+				<div class="row mt-3">
+				  <div class="col-sm-3">
+					<p class="mb-0">City</p>
+				  </div>
+				  <div class="col-sm-9">
+					  <input class="text-muted mb-0" name="city" placeholder="city">
+				  </div>
+				</div>
+		
+				<div class="row mt-3">
+				  <div class="col-sm-3">
+					<p class="mb-0">Postcode</p>
+				  </div>
+				  <div class="col-sm-9">
+					  <input class="text-muted mb-0" name="pincode" placeholder="pincode">
+				  </div>
+				</div>
+				<div class="row mt-3">
+				  <div class="col-sm-3">
+					<p class="mb-0">Landmark</p>
+				  </div>
+				  <div class="col-sm-9">
+					  <input class="text-muted mb-0" name="landmark" placeholder="landmark">
+				  </div>
+				</div>
+				 <div class="justify-content-end pt-3">
+				  <button type="submit" class="btn btn-secondary">Save Address</button>
+				</div> 
+				
+			  </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		
+		</div>
+	  </div>
+	</div>
+  </div>
+  <div class="row mt-4 d-flex" >
+
+	
+	<% viewAddress.forEach(function(result){%>
+		<% for(let i=0;i< result.Address.length; i++){%>
+	<div class="col-sm-6 ">   
+		
+		<div>
+			<p style="font-size: 1.5rem; margin-left: 44px">Address details</p>
+		</div>
+	
+
+  <div class="card" style="width: 18rem; margin-top: 30px;  text-align: center;">
+	<h5 class="card-title"><%=result.Address[0].Address%></h5>
+	<h5 class="card-title"><%=result.Address[0].City%></h5>
+	<h5 class="card-title"><%=result.Address[0].Landmark%></h5>
+	<h5 class="card-title"><%=result.Address[0].Phone%></h5>
+	<h5 class="card-title"><%=result.Address[0]. pincode%></h5>
+  </div>
+  <button style="border: groove; margin-left: 90px;
+  
+  margin-top: 10px;" class="btn btn-danger" type="button" onclick="deleteAddress('<%=result.Address[0]._id%>')"> Delete </button>
+  </div>
+
+</div>
+  <%}%>
+  <%})%>
+
+  	  
+</div>
+<%- include('../User/userfooter.ejs') %>
+
+<script>
+	function deleteAddress(addressId){
+		console.log("================7==================4444444444444444444444444444444=====================44444444444=================");
+	  console.log(addressId,"========77777777777777777777777777777777777777777777777777777777777777777==---------------------------------====================================-------------------------")
+	  $.ajax({
+		url:'/deleteaddress/'+addressId,
+		method: 'get',
+		success : (response) => {
+			console.log(response)
+		  if(response.status){
+			location.reload()
+		  }
+		}
+	  })
+	}
+  </script>
+					
+
+					
+
+					
+				
+
+
+
+	
+	
+	  
+	

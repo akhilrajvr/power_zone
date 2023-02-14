@@ -1,0 +1,85 @@
+<%- include('../Admin/adminlayout.ejs') %>
+<%- include('../Admin/adminHeader.ejs') %>
+<!-- <div class="container">
+    <div class="row">
+<div class="main-panel">
+    <div class="content-wrapper" style="margin-left: 100px;">
+      <div class="row" style="display:block;">
+        <div class="col-lg-6 grid-margin stretch-card " style="max-width:100%;">
+          <div class="userdiv table-responsive" style="width:100%;">
+            <table class="table mt-5">
+                <thead>
+                  <tr class="text-center">
+                    <th>No</th>
+                    <th>OrderId</th>
+                    <th>Total Price</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                  </tr>
+                  
+                </thead>
+              
+                <tbody>
+                  <% result.forEach(function(result,index){%>
+                    <%console.log(result)%>
+                    <tr class="text-center">
+                        
+                      <td><%=index+1%></td>
+                      <td><%=result._id%></td>
+                      <td><%=result.totalPrice%></td>
+                      <td><%=result.paymentMode%></td>
+                      <td><%=result.paymentStatus%></td>
+                      <td>
+                        <a href="/Admin/vieworder/<%=result._id%>" class="btn btn-primary">View</a>
+                      </td>
+                    </tr>
+                  <%})%>  
+                </tbody>
+              
+          </table>
+          <hr>
+          </div>
+        </div>
+        
+      </div>
+      
+      </div>
+    </div>
+</div>
+</div> -->
+
+<div class="contanier=container-fluid">
+    <div class="row">
+<table class="table">
+    <thead>
+        <thead>
+            <tr class="text-center">
+              <th>No</th>
+              <th>OrderId</th>
+              <th>Total Price</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th>Edit</th>
+            </tr>
+            
+          </thead>
+    <tbody>
+        <% result.forEach(function(result,index){%>
+          <%console.log(result)%>
+          <tr class="text-center">
+              
+            <td><%=index+1%></td>
+            <td><%=result._id%></td>
+            <td><%=result.totalPrice%></td>
+            <td><%=result.paymentMode%></td>
+            <td><%=result.paymentStatus%></td>
+            <td>
+              <a href="/Admin/vieworder/<%=result._id%>" class="btn btn-primary">View</a>
+            </td>
+          </tr>
+        <%})%>  
+      </tbody>
+  </table>
+</div>
+</div>

@@ -1,0 +1,54 @@
+<%- include('../Admin/adminlayout.ejs') %>
+<%- include('../Admin/adminHeader.ejs') %>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<h1 class="text-center" style="color: RED;">EDIT PRODUCT</h1>
+<form action="/admin/editproduct/<%=result[0].id%>" method="post" enctype="multipart/form-data">
+
+
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4" style="color: red;">Product Name</label>
+        <input name="productname" type="text" class="form-control" id="inputEmail4" placeholder="Product name" value="<%=result[0].productname%>">
+      </div>
+      <div class="form-group col-md-6" style="color: red;">
+        <label for="inputPassword4">Product category</label>
+        <br>
+        <select name="category" id="cars">
+          <option><%=result[0].category%></option>
+          </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputAddress" style="color: red;">Description</label>
+      <input name="description" type="text" class="form-control" id="inputAddress" placeholder="Description"value="<%=result[0].description%>">
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity" style="color: red;">Quantity</label>
+        <input name="quantity" type="number" class="form-control" id="inputCity" value="<%=result[0].quantity%>">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputState" style="color: red;">Price</label>
+        <input name="price" type="text" class="form-control" id="inputZip"value="<%=result[0].price%>">
+      </div>
+      
+      <div class="form-group col-md-6">
+        <label for="inputZip" style="color: red;">Upload Image</label>
+        <input value="<%=result[0].productImg[0]%>" accept="image/*" name="productImg" name="productImg" class="form-control form-control-lg" accept="image/*" id="formFileLg" type="file" multiple/>
+      </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary ms-5">ADD PRODUCT</button>
+  </form>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>

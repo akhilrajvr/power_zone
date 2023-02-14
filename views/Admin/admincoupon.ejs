@@ -1,0 +1,76 @@
+
+<%- include('../Admin/adminlayout.ejs') %>
+<%- include('../Admin/adminHeader.ejs') %>
+<div class="add-button" style="margin-top: 20px; margin-left: 20px;">
+<a class="btn btn-primary" type="submit" href="/Admin/addcoupon">Add Coupon</a>
+</div>
+<table class="table" mt-5>
+
+    <thead>
+        <tr class="text-center">
+            <th>No</th>
+            <th >Coupon Name</th>
+            <th >Coupon Code</th>
+            <th >Percentage</th>
+            <th >Min amount</th>
+            <th >Max amount</th>
+            <th >Expiry date</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% result.forEach(function(result,index){%>
+            <tr class="text-center">
+              <th><%=index+1%></th>
+              <td><%=result.CouponName%></td>
+              <td><%=result.CouponCode%></td>
+              <td><%=result.Percentage%></td>
+              <td><%=result.Minamount%></td>
+              <td><%=result.Maxamount%></td>
+              <td><%=result.ExpiryDate%></td>
+              <td>
+                <a class="btn btn-success" href="/Admin/editcoupon/<%=result.id%>">Edit</a>
+              </td>
+              <td>
+                <a class="btn btn-primary" onclick="deletecoupon('<%=result.id%>')">Delete</a>
+              </td>
+            </tr>  
+            <%})%>
+
+    </tbody>
+  </table>
+
+  <script>
+    function deletecoupon(couponId){
+    Swal.fire({
+    title: 'Are you sure?',
+    text: "You are deleting a coupon!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Confirm!'
+    }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+            url: '/Admin/deletecoupon/'+couponId,
+            method: 'get',
+            success : (response) =>{
+              if(response.status){
+                Swal.fire({
+                  icon : 'success',
+                  title: 'Your Coupon is Deleted.',
+                  showConfirmbutton:false
+              }).then(()=>{
+                  location.reload()
+              })
+              }
+            }
+          })
+  }
+})
+    }
+    
+
+  </script>

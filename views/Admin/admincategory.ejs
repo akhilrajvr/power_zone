@@ -1,0 +1,25 @@
+<%- include('../Admin/adminlayout.ejs') %>
+<%- include('../Admin/adminHeader.ejs') %>
+<table class="table mt-5">
+    <div class="mt-5 ms-5">
+    <form action="/admin/addCategory" method="post">
+        <input class="categoryinput" type="text" name="category" required>
+        <button class="btn btn-primary mt" type="submit">Add Category</button>
+    </form>
+</div>
+    <% result.forEach(function(result,index){%>
+        <tr class="text-center">
+          <th><%=index+1%></th>
+          <th><%=result.category%></th>
+        
+         <td>
+          <a class="btn btn-info " style="color: white;" href="/admin/categoryproduct/<%=result.category%>">Products</a>
+         </td>
+         <td>
+          <a class=" btn btn-danger" onclick="deletecategory('<%=result.category%>')">Delete</a>
+         </td>
+        </tr> 
+      <%})%>
+    </tbody>
+</table>
+      

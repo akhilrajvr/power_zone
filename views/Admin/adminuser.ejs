@@ -1,0 +1,33 @@
+<%- include('../Admin/adminlayout.ejs') %>
+<%- include('../Admin/adminHeader.ejs') %>
+<table class="table mt-5">
+    <thead>
+      <tr  class="text-center">
+        <th scope="col">NO</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% result.forEach(function(result,index){%>
+        <tr class="text-center">
+          <th><%=index+1%></th>
+          <th><%=result.Firstname%></th>
+          <th><%=result.email%></th>
+          <th><%=result.Phone%></th>
+
+          
+            <td>
+              <%if (result.userStatus==="active") {%>
+              <a onclick="blockuser('<%=result._id%>')" class="btn btn-danger" >block</a>
+              <%}else{%>
+               <a class="btn btn-success" href="/admin/userUnblock/<%=result._id%>">Unblock</a>   
+              <%} %>
+            </td>
+          </tr>
+      <%}) %>
+    </tbody>
+  </table>
+ 
+ 

@@ -1,0 +1,49 @@
+<%- include('../Admin/adminlayout.ejs') %>
+<%- include('../Admin/adminHeader.ejs') %>
+<div class="mt-5 ms-3">
+    <a class="btn btn-primary" type="submit" href="/Admin/addproduct">Add Product</a>
+</div>
+<table class="table mt-5">
+    <thead>
+        <tr class="text-center">
+            <th class="text-center" scope="col">No</th>
+            <th class="text-center" scope="col">product Image</th>
+            <th class="text-center" scope="col">Product Name</th>
+            <th class="text-center" scope="col">category</th>
+            <th class="text-center" scope="col">Quantity</th>
+            <th class="text-center" scope="col">Price</th>
+
+        </tr>
+        
+    </thead>
+    <tbody>
+        <% result.forEach(function(result,index){%>
+          <tr class="text-center">
+            <th><%=index+1%></th>
+            <th style="width:12%;"><img src="/images/<%=result.productImg[0]%>" style="width:50%;"></th>
+            <th><%=result.productname%></th>
+            <th><%=result.category%></th>
+            <th><%=result.quantity%></th>
+            <th><%=result.price%></th>
+            <td>
+                <a href="/Admin/editproduct/<%=result._id%>" class="btn btn-info" style="color: rgb(6, 2, 2);">Edit</a>
+            </td>
+            <td>
+              <%if(result.productStatus==="true"){%>
+                <a onclick="softdeleteproduct('<%=result._id%>')"  class="btn btn-danger">Delete</a>
+              <%}else{%>
+                <a href="/Admin/undosoftdeleteproduct/<%=result._id%>" class="btn btn-success">UndoSoft</a>
+              <%}%>
+            </td>  
+            <!-- <td>  
+              <a onclick="deleteproduct('<%=result._id%>')" class="btn btn-danger">Delete</a>
+            </td> -->
+          </tr>
+        <%})%>
+          
+      </tbody>
+    
+ 
+    
+   
+</table>

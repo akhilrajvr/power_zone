@@ -1,0 +1,91 @@
+<%- include('../User/layout.ejs') %>
+    <%- include('../User/userheader.ejs') %>
+
+        <!-- Page Info -->
+     
+        <div class="page-info-section page-info-big">
+            <div class="container">
+                <h2>Our Collection</h2>
+                <div class="site-breadcrumb">
+                    <a href="">Home</a> /
+                    <span>Collections</span>
+                </div>
+                <img src="/User/img/young-fitness.jpg" alt="" class="cata-top-pic mt-3 ms-3">
+            </div>
+        </div>
+        <!-- Page Info end -->
+       
+
+
+        <!-- Page -->
+        <div class="container">
+        <div class="page-area categorie-page spad">
+            <div class="container">
+                <div class="categorie-filter-warp">
+                 
+                    <div class="cf-right">
+                        <div class="cf-layouts">
+                            <a href="#"><img src="/User/img/icons/layout-1.png" alt=""></a>
+                            <a class="active" href="#"><img src="/User/img/icons/layout-2.png" alt=""></a>
+                        </div>
+                        <% categorys.forEach(categorys=> { %>
+                            <a href="/categoryfilter/<%=categorys.category%>" >
+                                <button id="<%=categorys.id%>"  > <%=categorys.category%></button   >
+                            </a>
+                            <% }); %>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <% result.forEach(function(result){%>
+                        
+                        <div class="col-lg-3">
+                            <a href="/productdetails/<%=result.id%>">
+                            
+                            <div class="product-item">
+                               
+                                <figure>
+                                    <img src="/images/<%=result.productImg[0]%>" class="img-product p-3" alt="">
+                                    
+                                    <div class="pi-meta">
+                                        <div class="pi-m-left">
+                                            <img src="/User/img/icons/eye.png" href="/productdetails" alt="">
+                                            <p>quick view</p>
+                                        </div>
+                                        <a>
+                                        <div class="pi-m-right" title="wishlist"  onclick="wishlist('<%=result.id%>')">
+                                            <img src="/User/img/icons/heart.png" alt="">
+                                            <p>save</p>
+                                        </div>
+                                    </a>
+                                    </div>
+                                </figure>
+                                <div class="product-info">
+                                    <h6>
+                                        <%=result.productname%>
+                                    </h6>
+                                    <p>
+                                        <%=result.price%>
+                                    </p>
+                                    
+						<a href="#"  class="site-btn btn-line"  >ADD TO CART</a>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                        <%})%>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+        <!-- Page -->
+
+        <%- include('../User/userfooter.ejs') %>
+
+        <script>
+            function show(id){
+               console.log("lplplpl");
+              
+            }
+        </script>

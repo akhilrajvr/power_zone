@@ -1,0 +1,499 @@
+<%- include('../User/layout.ejs') %>
+	<%- include('../User/userheader.ejs') %>
+
+  
+  <body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+      <div class="loader"></div>
+    </div>
+    
+    <!-- Header section -->
+   
+    <!-- Header section end -->
+  
+  
+    <!-- Page Info -->
+    <div class="page-info-section page-info">
+      <div class="container">
+        <div class="site-breadcrumb">
+          <a href="">Home</a> / 
+          <a href="">Sales</a> / 
+       
+          <a href="">Cart</a> / 
+          <span>Checkout</span>
+        </div>
+        <img src="User/img/page-info-art.png" alt="" class="page-info-art">
+      </div>
+    </div>
+    <!-- Page Info end -->
+  
+    <!-- <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
+                    <div id="checkout_coupon" class="coupon-checkout-content">
+                        <div class="coupon-info">
+                            <form>
+                                <p class="checkout-coupon mt-3" >
+                                    <input type="text" placeholder="Coupon code" id="couponcode" />
+                                    <input type="button" value="Apply Coupon" onclick="coupon('<%=totalprice%>')" />
+                                    <p id="couponErr"></p>
+                                </p>
+                            </form>
+                        </div>
+                    </div> -->
+    <!-- Page -->
+    <!-- <div class="d-flex justify-content-end mb-2 mt-2" >
+       Modal -->
+      
+       <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Available Coupons</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  
+                  <div class="modal-body">
+                      
+                      <div class="containercoupon">
+                          <% coupon.forEach(function(result){%>
+                          <div class="coupon-card">
+  
+                        
+                              <div class="coupon-row">
+                                  <span id="cpnCode"><%=result.CouponCode%></span>
+                                  <span id="cpnBtn">Copy Code</span>
+                              </div>
+                              <p>Valid Till: <%=result.ExpiryDate%></p>
+                              <div class="circle1"></div>
+                              <div class="circle2"></div>
+                          </div>
+                          <br>
+                          <%})%>
+                     </div>
+                  </div>
+                  
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  </div>
+             </div>
+          </div>
+          
+      </div>
+      
+  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary">Available Coupons</a>
+  </div>  -
+   <%for(let i=0;i< userAddress.Address.length; i++){%>
+     <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Saved Address</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+           <!-- <p class="card-subtitle" id="fullname<%=i%>"><%=userAddress.Fullname%></p>
+          <p class="card-subtitle" id="address<%=i%>"><%=userAddress.Address[0].Address%></p>
+          <p class="card-subtitle" id="district<%=i%>"><%=userAddress.Address[0].District%></p>
+          <p class="card-subtitle" id="state<%=i%>"><%=userAddress.Address[0].State%></p>
+          <p class="card-subtitle" id="phone<%=i%>"><%=userAddress.Address[0].Phone%></p>
+          <p class="card-subtitle" id="postcode<%=i%>"><%=userAddress.Address[0].Postcode%></p>
+          
+          <button onclick="useAddress('<%=i%>')" type="button" class="card-link btn btn-secondary">Use</button>
+          
+        </div>
+    </div>     
+ <%}%>   -->
+
+    
+    <div class="page-area cart-page spad">
+      <div class="container">
+        <form class="checkout-form" id="checkout">
+          <div class="row">
+            <div class="col-lg-6">
+              <h4 class="checkout-title">Billing Address</h4>
+              <div class="row">
+                <div class="col-md-6">
+                  <input type="text" name="Firstname" placeholder="First Name *">
+                </div>
+                <div class="col-md-6">
+                  <input type="text"  name="Lastname" placeholder="Last Name *">
+                </div>
+                <div class="col-md-12">
+              
+                
+                  <input type="text" name="Address"  placeholder="Address *">
+                  <input type="text" name="city" placeholder="city">
+                  <input type="text" name="Phone" placeholder="Phone no *">
+                  <input type="email" name="email" placeholder="Email Address *">
+                  <input type="text" name="landmark" placeholder="Landmark *">
+                  <input type="text" name="pincode" placeholder="Pincode *">
+                  <div class="checkbox-items">
+                   
+                
+                  
+                  </div>
+                </div>
+            
+                <div class="col-md-6">
+                 <!-- <a href="#"><button class="btn btn-danger">Add</button></a> -->
+                </div>
+            
+             
+                 <div class="container pt-5 ">
+              
+                <h4>Coupon code</h4>
+                <div class="cupon-input ">
+                  <input type="text" id="couponcode">
+                  <button class="site-btn " type="button"  id="couponcode" onclick="coupon('<%=totalprice%>')">Apply</button>
+                  <p id="couponErr"></p>
+                </div>
+              </div> 
+              
+              </div>
+           
+            </div>
+         
+            <div class="col-lg-6">
+              <div class="order-card">
+                <div class="order-details">
+                  <div class="od-warp">
+                    <h4 class="checkout-title">Your order</h4>
+                    <!-- <table class="order-table">
+                      <thead>
+                        <tr>
+                        
+                            <th class="product-name">Product Name</th>
+                            <th calss="product-total" >total</th>
+                          
+                          
+
+                            
+                            
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% viewcart.products.forEach(function(result){%>
+                          <tr class="cart_item" style="padding-top: 20px;">
+                            <td class="product-name">
+                              <%=result.productname%><strong class="product-quantity"> × <%=result.quantity%></strong>
+                          </td>
+                              <td class="product-total">
+                                  <span class="amount"><%= result.totalprice%></span>
+                              </td>
+                             
+                          </tr>
+                      <%})%>
+
+                      </tbody>
+                     <tbody>
+                      <tfoot>
+                        <tr class="cart-subtotal">
+                          <th>Cart Subtotal</th>
+                          <td id="ordertotal"><span class="amount" id="ordertotal"><%=totalprice%></</span></td>
+                      </tr>
+                      <div id="coupontotal">
+                          <tr class="cart-subtotal">
+                              <th>Discount</th>
+                              <td id="discountid"><span class="amount" id="discount"></span></td>
+                          </tr>
+                          <tr class="order-total">
+                              <th>Order Total</th>
+                              <td id="finaltotal"><strong><span class="amount" id="BillAmount"></span></strong>
+                              </td>
+                          </tr>	
+                      </div>
+                    </div>
+
+                        < <tr class="order-total" style="margin-left: 5px;"> -->
+                        
+                          
+                         
+                      
+                         
+                      
+
+                     
+                      
+                          
+                         
+                        
+                        
+                      <!-- </tfoot>
+                    </table> --> 
+                    <table class="order-table">
+                      <thead>
+                          <tr>
+                              <th class="product-name">Product</th>
+                              <th class="product-total">Total</th>
+                          </tr>							
+                      </thead>
+                      <tbody>
+                          <% viewcart.products.forEach(function(result){%>
+                              <tr class="cart_item">
+                                  <td class="product-name">
+                                      <%=result.productname%><strong class="product-quantity"> × <%=result.quantity%></strong>
+                                  </td>
+                                  <td class="product-total">
+                                      <span class="amount"> <%=totalPrice = result.quantity*result.price  %></span>
+                                  </td>
+                              </tr>
+                          <%})%>
+                          
+                      <tfoot>
+                          <tr class="cart-subtotal">
+                              <th>Cart Subtotal</th>
+                              <td id="ordertotal"><span class="amount" ><%=totalprice%></</span></td>
+                          </tr>
+                          <div id="coupontotal">
+                              <tr class="cart-subtotal">
+                                  <th>Discount</th>
+                                  <td id="discountid"><span class="amount" >0</span></td>
+                              </tr>
+                              <tr class="order-total">
+                                  <th>Order Total</th>
+                                  <td id="finaltotal"><strong><span class="amount"><%=totalprice%></span></strong>
+                                  </td>
+                              </tr>	
+                          </div>
+                                        
+                      </tfoot>
+
+                      
+                  </table>
+                  </div>
+                  <div class="payment-method">
+                    <div class="pm-item">
+                      <input type="radio" name="payment" id="one" value="COD">
+                      <label for="one">COD</label>
+                    </div>
+                 
+                    <div class="pm-item">
+                      <input type="radio" name="payment" id="two" value="Razorpay" >
+                      <label for="two">Online Payment</label>
+                    </div>
+                
+                  </div>
+                </div>
+                <a><button type="button" onclick="checkout('<%=totalprice%>')"  class="site-btn btn-full" >Place Order</button></a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+   
+
+    </div>
+    
+
+    
+
+    <!-- Page -->
+  
+    <!-- <script>
+      function coupon(ordertotal){
+        let coupon = document.getElementById('couponcode').value
+        
+        
+    
+    
+        console.log("lplpppppppp");
+        $.ajax({
+          url:'/applycoupon/'+coupon+'!'+ordertotal,
+          method:'post' ,
+          success : (response) => {
+            console.log(response);
+          
+            if(response.couponLimit){
+              
+    
+            coupon = response.couponLimit
+            
+    
+          
+           // let userCoupon = document.getElementById('coupontotal')
+            // console.log('=======',coupontotal)
+            let totalAmount = "<%=totalprice%>"
+            console.log(totalAmount,"=====total");
+            let discount = coupon.discount 
+            let array=discount.split("%");
+            discount = Number(array[0])
+            let discountPrice = (Number(totalAmount)*Number(discount))/100 
+            document.getElementById('discount').innerText = discountPrice
+            document.getElementById('BillAmount').innerText =totalAmount-discountPrice
+            
+            console.log(discountPrice,'discountPrice');
+            
+            
+            //
+    
+            // let orderDiscount = order-discount
+            // console.log(orderDiscount,'=====================orderDiscount==========');
+            // document.getElementById('finaltotal').innerText = orderDiscount
+    
+            
+    
+    
+            Swal.fire({
+            title: "Coupon Applied!",
+            text:"You get "+discount+" off!",
+            icon: "success",
+            showCancelButton: false,
+            })
+            }else if(response.couponErr){
+              let error = response.couponErr
+              console.log(error)
+              document.getElementById('couponErr').innerText = error
+            }else{
+              let coupon = response.couponLimit
+    
+              let order = document.getElementById('ordertotal').innerText
+              let discount = coupon.maxAmount
+    
+              document.getElementById('discount').innerText = discountPrice
+    
+              let orderDiscount = order-discount
+              document.getElementById('BillAmount').innerText = totalAmount-discountPrice
+    
+            Swal.fire({
+            title: "Coupon Applied!",
+            text:"You get "+discount+" off!",
+            icon: "success",
+            showCancelButton: false,
+            })
+          }
+    
+          }
+        })
+      }
+    </script> -->
+    <script>
+      function coupon(ordertotal){
+        let coupon = document.getElementById('couponcode').value
+        $.ajax({
+          url:'/applycoupon/'+coupon+'!'+ordertotal,
+          method:'post' ,
+          success : (response) => {
+            console.log(response);
+            if(response.couponObj){
+            
+            coupon = response.couponObj
+            // let userCoupon = document.getElementById('coupontotal1')
+    
+            let order = document.getElementById('ordertotal').innerText
+            console.log(order)
+
+
+          
+            let discount =Number(order)*Number(coupon.discount)/100 
+            document.getElementById('discountid').innerText = discount
+            
+     
+    
+            let orderDiscount = order-discount
+            document.getElementById('finaltotal').innerText = orderDiscount
+    
+            Swal.fire({
+            title: "Coupon Applied!",
+            text:"You get "+discount+" off!",
+            icon: "success",
+            showCancelButton: false,
+            })
+            }else if(response.couponErr){
+              let error = response.couponErr
+              console.log(error)
+              document.getElementById('couponErr').innerText = error
+            }else{
+              let coupon = response.couponLimit
+    
+              let order = document.getElementById('ordertotal').innerText
+              let discount = coupon.MaxAmount
+    
+              document.getElementById('discountid').innerText = discount
+    
+              let orderDiscount = order-discount
+              document.getElementById('finaltotal').innerText = orderDiscount
+    
+            Swal.fire({
+            title: "Coupon Applied!",
+            text:"You get "+discount+" off!",
+            icon: "success",
+            showCancelButton: false,
+            })
+          }
+    
+          }
+        })
+      }
+    </script>
+
+<script>
+  function checkout(total) {
+   console.log(total,656565);
+    $.ajax({
+    url: '/checkout/'+total,
+    method: 'post',
+    data: $('#checkout').serialize(),
+    success: (response) => {
+      console.log(response);
+    if (response.codSuccess) {
+   
+      location.href='/placedOrder'
+
+    }else{
+     
+  
+      razorPayPayment(response)
+      
+    }
+    
+    function razorPayPayment(order) {
+      console.log(order);
+      var options = {
+      "key": "rzp_test_SN6n6I4ZbNE9FY", // Enter the Key ID generated from the Dashboard
+      "amount": order.amount , // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "Powerzone",
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response) {
+        verifyPayment(response, order)
+         },
+       "prefill": {
+       "name": "Gaurav Kumar",
+         "email": "gaurav.kumar@example.com",
+         "contact": "9999999999"
+         },
+        "notes": {
+        "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+        "color": "#3398cc"
+         }
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
+
+      function verifyPayment(payment, order) {
+        console.log("hwwwww");
+         $.ajax({
+         url: '/verifypayment',
+         data: { payment, order },
+         method: 'post',
+         success: (response) => {
+          console.log(response);
+         if (response.status) {
+          location.href = '/placedOrder'
+         }else{
+          alert('Payment Failed')
+         }
+        }
+      })
+    }
+  }
+}
+    })
+  }
+</script>
+  
+   
+
+  <%- include('../User/userfooter.ejs') %>

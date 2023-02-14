@@ -1,0 +1,52 @@
+
+
+<%- include('../User/layout.ejs') %>
+<header class="header-section header-normal">
+    <div class="container-fluid">
+        <!-- logo -->
+        <div class="site-logo">
+            <a href="/">
+            <h5 style="color: white;">POWER ZONE</h5> 
+        </a>
+        </div>
+        <!-- responsive -->
+        <div class="nav-switch">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="header-right">
+            
+             
+            
+                <a href="/cart" class="card-bag"><img src="/User/img/icons/bag.png" alt=""><span>2</span></a>
+                <a href="/wishlist" class="heart"  onclick=><i class=" bi bi-heart"></i></a>
+                <a href="#" class="search"><img src="/User/img/icons/search.png" alt=""></a>
+            
+        
+        </div>
+        <!-- site menu -->
+        <ul class="main-menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/shop">Shop</a></li>
+         
+           
+            <% if(user){ %>
+                <li><a href="/wishlist">Wishlist</a></li>
+                <li><a href="/myprofile">profile</a></li>
+                <li><a href="/MyOrders">MyOrders</a></li>
+           
+               
+                
+                <li><a href="/logout">Logout</a></li>
+              <% } else{ %>  
+                <li><a href="/login">Login</a></li>
+             <% } %>
+            
+      
+          
+            
+             </ul>
+         
+   
+             
+       
+</header>
