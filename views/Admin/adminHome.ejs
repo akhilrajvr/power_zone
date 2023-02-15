@@ -268,7 +268,7 @@
             <!-- Widgets End -->
            
 
-              <!-- <script>
+              <script>
                 var ctx = document.getElementById('myChart').getContext('2d');
                        var myChart = new Chart(ctx, {
                            type: 'line',
@@ -333,15 +333,15 @@
                    }]
                },          
            });      
-       </script>  -->
+       </script>  
       
-           <%- include('../Admin/adminfooter.ejs') %>   
-            < <script>
+          
+              <!-- <script>
             const dashboard = async() => {
               try {
               //piechart
                $.ajax({
-                url : ('/admin/getdashboarddetails'),
+                url : ('/Admin/getdashboarddetails'),
                 method : 'get',
                 success : (response) => {
                   console.log(response)
@@ -379,7 +379,7 @@
                
               //barChart
               $.ajax({
-                url : ('/admin/dashboardBar'),
+                url : ('/Admin/dashboardBar'),
                 method : 'get' ,
                 success : (response) => {
                   document.getElementById('profit').innerText = response.Profit
@@ -468,6 +468,6 @@
               }
             }
             dashboard()
-          </script>  
+          </script>     -->
 
-          
+             <%- include('../Admin/adminfooter.ejs') %>  
