@@ -26,7 +26,7 @@ module.exports={
         },
 
         getdashboardDetails:async(req,res)=>{
-            console.log('heloooooo================');
+           
             let result1 = {
                 cancelledOrders : "0",
                 completedOrders : "0",
