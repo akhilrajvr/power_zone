@@ -26,6 +26,7 @@ module.exports={
         },
 
         getdashboardDetails:async(req,res)=>{
+            console.log('heloooooo================');
             let result1 = {
                 cancelledOrders : "0",
                 completedOrders : "0",
@@ -39,6 +40,7 @@ module.exports={
                     {$count : 'totalcount' }
                 ]
             )
+            
     
             const completedOrders = await orderModel.aggregate(
                 [
@@ -76,6 +78,7 @@ module.exports={
                 result1.pendingOrders = pendingOrders
             }
             res.json(result1)
+            console.log(result1)
         },
 
         getdashboardBar :async(req,res)=>{
@@ -131,8 +134,11 @@ module.exports={
             result.totalSales = totalSales
             result.Profit = Profit
             result.dates = dates
+
+            
     
             res.json(result)
+            console.log(result)
         },
 
 
