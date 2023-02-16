@@ -904,8 +904,6 @@ module.exports = {
         let userId = req.session.user._id;
         userModel.find({ _id: userId }, async (err, data) => {
           if (data) {
-            console.log("its Working");
-            console.log(req.body);
             await userModel.updateOne(
               { _id: userId },
               {
@@ -935,7 +933,9 @@ module.exports = {
         if(loggedIn){
         let userId = req.session.user._id
         let addressId = req.params.id
-       await userModel.findOne({_id:userId},async(err,data)=>{
+        console.log(addressId);
+      const data= await userModel.findOne({_id:userId})
+      console.log(addressId);
             if(data){
                 
                    await  userModel.updateOne({_id:userId},{
@@ -946,9 +946,9 @@ module.exports = {
                         }
                     }) 
                 
+                    res.json({status:true})   
             }     
-            res.json({status:true})   
-        })
+       
         }else{
             res.redirect('/login')
         }
