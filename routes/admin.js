@@ -9,6 +9,8 @@ const bannerImg=require('../multer/addbanner-multer')
 
 router.get('/',adminRouter.getAdminLogin)
 
+router.get('/adminhome',adminRouter.getAdminHome)
+
 router.get('/getdashboarddetails',adminRouter.getdashboardDetails)
 
 router.get('/dashboardBar',adminRouter.getdashboardBar)

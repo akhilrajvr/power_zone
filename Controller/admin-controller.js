@@ -15,14 +15,12 @@ let categoryErr;
 module.exports={
   
         getAdminLogin:(req,res)=>{
-            if(loggedIn){
-                let admin = req.session.admin
-                res.render('Admin/adminhome',{admin})
-            }else{
-                res.render('Admin/adminlogin')
-                
-            }
+            res.render('Admin/adminlogin',{adminloginErr})
             
+        },
+
+        getAdminHome:(req,res)=>{
+          res.render('Admin/adminHome')
         },
 
         getdashboardDetails:async(req,res)=>{
@@ -143,21 +141,21 @@ module.exports={
 
 
 
-        getAdminHome:(req,res) => {
-            if(loggedIn){
-                res.render('Admin/adminHome')  
-            }else{
-                res.render('/admin')
-            }
+        // // getAdminHome:(req,res) => {
+        // //     if(loggedIn){
+        // //         res.render('Admin/adminHome')  
+        // //     }else{
+        // //         res.render('/admin')
+        // //     }
             
-        },
+        // },
         PostAdminlogin :async (req,res) => {
             let Admin = await adminModel.findOne({Name:req.body.name})
             if(Admin){
                 if(Admin.Password===req.body.Password){
                     loggedIn = true
                     req.session.admin = Admin
-                    res.redirect('/admin')
+                    res.redirect('/Admin/adminHome')
                 }else{
                     adminloginErr = "Invalid Email or Password"
                     res.redirect('/admin')
