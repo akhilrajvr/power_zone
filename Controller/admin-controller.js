@@ -364,7 +364,7 @@ module.exports={
         getAdminlogout:(req,res)=>{
             req.session.destroy();
             loggedIn = false;
-            res.redirect('/admin')
+            res.redirect('/Admin')
         } ,
 
          getAddCuopon :(req,res)=>{
