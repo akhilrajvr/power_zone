@@ -3,13 +3,13 @@ const storageImg = require('../multer/multer')
 const adminRouter=require('../Controller/admin-controller')
 const router=express.Router()
 const bannerImg=require('../multer/addbanner-multer')
-
+const adminsession = require('../middleware/auth')
 
 
 
 router.get('/',adminRouter.getAdminLogin)
 
-router.get('/adminhome',adminRouter.getAdminHome)
+router.get('/adminhome', adminsession.adminSession,adminRouter.getAdminHome)
 
 router.get('/getdashboarddetails',adminRouter.getdashboardDetails)
 
@@ -31,15 +31,15 @@ router.get('/admincategory',adminRouter.getAllcategory)
 
 router.post ('/addcategory',adminRouter.postAddcategory)
 
-router.get('/adminproduct',adminRouter.getAdminproduct)
+router.get('/adminproduct', adminsession.adminSession,adminRouter.getAdminproduct)
 
-router.get('/addproduct',adminRouter.getAddproduct)
+router.get('/addproduct', adminsession.adminSession,adminRouter.getAddproduct)
 
 router.post('/addproduct',storageImg.array("productImg",3),adminRouter.postAddProduct)
 
-router.get('/categoryproduct/:category',adminRouter.getcategoryproduct)
+router.get('/categoryproduct/:category',adminsession.adminSession,adminRouter.getcategoryproduct)
 
-router.get('/deletecategory/:category',adminRouter.getDeleteCategory)
+router.get('/deletecategory/:category',adminsession.adminSession,adminRouter.getDeleteCategory)
 
 router.get('/editproduct/:id',adminRouter.getEditproduct)
 
@@ -51,7 +51,7 @@ router.get('/undosoftdeleteproduct/:id',adminRouter.getUndoSoftDeleteProduct)
 
 // router.get('/deleteproduct/:id',adminRouter.getdeleteProduct)
 
-  router.get('/addcoupon',adminRouter .getAddCuopon)
+  router.get('/addcoupon',adminsession.adminSession,adminRouter .getAddCuopon)
 
   router.post('/addpostcuopon',adminRouter.postaddcuopon)
 
@@ -63,13 +63,13 @@ router.get('/undosoftdeleteproduct/:id',adminRouter.getUndoSoftDeleteProduct)
 
  router.get('/deletecoupon/:id',adminRouter.getdeletecoupon)
 
- router.get('/addbanner',adminRouter.getAddbanner)
+ router.get('/addbanner',adminsession.adminSession,adminRouter.getAddbanner)
  
  router.post('/addbanner',bannerImg.array("bannerimage",2),adminRouter.postAddbanner)
   
  router.post('/editbanner/:id',bannerImg.array("bannerimage",2),adminRouter.postEditbanner)
 
- router .get('/vieworder/:id',adminRouter.getOrders)
+ router .get('/vieworder/:id',adminsession.adminSession,adminRouter.getOrders)
 
  router.get('/placeOrder/:id',adminRouter.getplacedOrders)
 
@@ -79,11 +79,11 @@ router.get('/cancelledOrder/:id',adminRouter.getcancelledOrders)
 
 router.get('/deliveredOrder/:id',adminRouter.getdeliveredOrders)
 
-router.get('/adminorders',adminRouter.getadminorders)
+router.get('/adminorders',adminsession.adminSession,adminRouter.getadminorders)
 
- router.get('/adminsales',adminRouter.getAdminSales)
+ router.get('/adminsales',adminsession.adminSession,adminRouter.getAdminSales)
 
- router.get('/adminhome',adminRouter.getAdminHome)
+  router.get('/adminhome',adminRouter.getAdminHome)
 
  router.get('/adminbannerlist',adminRouter.getAdminbannerList)
  

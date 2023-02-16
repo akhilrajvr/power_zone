@@ -153,16 +153,16 @@ module.exports={
             let Admin = await adminModel.findOne({Name:req.body.name})
             if(Admin){
                 if(Admin.Password===req.body.Password){
-                    loggedIn = true
-                    req.session.admin = Admin
+                    req.session.adminLogin = true
+                    
                     res.redirect('/Admin/adminHome')
                 }else{
                     adminloginErr = "Invalid Email or Password"
-                    res.redirect('/admin')
+                    res.redirect('/Admin')
                 }           
             }else{
                 adminloginErr = "Invalid Email or Password"
-                res.redirect('/admin')
+                res.redirect('/Admin')
             }
         },
 
@@ -362,8 +362,9 @@ module.exports={
     //        res.json({status:true})
     //    },
         getAdminlogout:(req,res)=>{
+            
+            req.session.adminLogin = false;
             req.session.destroy();
-            loggedIn = false;
             res.redirect('/Admin')
         } ,
 

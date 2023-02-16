@@ -14,6 +14,12 @@ app.use(express.urlencoded())
 app.use(express.json())
 app.use(express.static(path.join(__dirname,'public')))
 app.use(nocache())
+
+
+app.use(function (req, res, next) {
+    res.header('Cache-control', "private,no-cache,no-store,must-revalidate")
+    next()
+})
  
 app.set('view engine','ejs')
 app.set('views',path.join(__dirname,'views'));
