@@ -33,7 +33,7 @@ router.post ('/addcategory',adminRouter.postAddcategory)
 
 router.get('/adminproduct', adminsession.adminSession,adminRouter.getAdminproduct)
 
-router.get('/addproduct', adminsession.adminSession,adminRouter.getAddproduct)
+router.get('/addproduct', adminRouter.getAddproduct)
 
 router.post('/addproduct',storageImg.array("productImg",3),adminRouter.postAddProduct)
 
