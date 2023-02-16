@@ -258,7 +258,7 @@ module.exports={
             if(err){
                 console.log(err)
             }else{
-                res.render('Admin/adminProduct',{result})
+                res.render('Admin/adminproduct',{result})
             }
         })
 

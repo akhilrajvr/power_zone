@@ -19,7 +19,7 @@ app.set('view engine','ejs')
 app.set('views',path.join(__dirname,'views'));
 
 app.use('/',userRouter)
-app.use('/admin',adminRouter)
+app.use('/Admin',adminRouter)
 
 app.listen(5000,()=>{
     console.log('server Running');
