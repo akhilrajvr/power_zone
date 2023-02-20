@@ -28,78 +28,24 @@
     </div>
     <!-- Page Info end -->
   
-    <!-- <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
-                    <div id="checkout_coupon" class="coupon-checkout-content">
-                        <div class="coupon-info">
-                            <form>
-                                <p class="checkout-coupon mt-3" >
-                                    <input type="text" placeholder="Coupon code" id="couponcode" />
-                                    <input type="button" value="Apply Coupon" onclick="coupon('<%=totalprice%>')" />
-                                    <p id="couponErr"></p>
-                                </p>
-                            </form>
-                        </div>
-                    </div> -->
-    <!-- Page -->
-    <!-- <div class="d-flex justify-content-end mb-2 mt-2" >
-       Modal -->
-      
-       <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Available Coupons</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  
-                  <div class="modal-body">
-                      
-                      <div class="containercoupon">
-                          <% coupon.forEach(function(result){%>
-                          <div class="coupon-card">
-  
-                        
-                              <div class="coupon-row">
-                                  <span id="cpnCode"><%=result.CouponCode%></span>
-                                  <span id="cpnBtn">Copy Code</span>
-                              </div>
-                              <p>Valid Till: <%=result.ExpiryDate%></p>
-                              <div class="circle1"></div>
-                              <div class="circle2"></div>
-                          </div>
-                          <br>
-                          <%})%>
-                     </div>
-                  </div>
-                  
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  </div>
-             </div>
+    <%for(let i=0;i< userAddress.Address.length; i++){%>
+      <div class="card" style="width: 18rem; margin-left: 180px; margin-top: 30px;">
+          <div class="card-body">
+            <h5 class="card-title">Saved Address</h5>
+            <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+            <p class="card-subtitle" id="Firstname<%=i%>"><%=userAddress.Firstname%></p>
+            <p class="card-subtitle" id="Lastname<%=i%>"><%=userAddress.Lastname%></p>
+            <p class="card-subtitle" id="Address<%=i%>"><%=userAddress.Address[0].Address%></p>
+            <p class="card-subtitle" id="landmark<%=i%>"><%=userAddress.Address[0].Landmark%></p>
+            <p class="card-subtitle" id="city<%=i%>"><%=userAddress.Address[0].City%></p>
+            <p class="card-subtitle" id="Phone<%=i%>"><%=userAddress.Address[0].Phone%></p>
+            <p class="card-subtitle" id="pincode<%=i%>"><%=userAddress.Address[0].Pincode%></p>
+            
+            <button onclick="useAddress('<%=i%>')" type="button" class="card-link btn btn-secondary">Use</button>
+            
           </div>
-          
-      </div>
-      
-  <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary">Available Coupons</a>
-  </div>  -
-   <%for(let i=0;i< userAddress.Address.length; i++){%>
-     <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Saved Address</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
-           <!-- <p class="card-subtitle" id="fullname<%=i%>"><%=userAddress.Fullname%></p>
-          <p class="card-subtitle" id="address<%=i%>"><%=userAddress.Address[0].Address%></p>
-          <p class="card-subtitle" id="district<%=i%>"><%=userAddress.Address[0].District%></p>
-          <p class="card-subtitle" id="state<%=i%>"><%=userAddress.Address[0].State%></p>
-          <p class="card-subtitle" id="phone<%=i%>"><%=userAddress.Address[0].Phone%></p>
-          <p class="card-subtitle" id="postcode<%=i%>"><%=userAddress.Address[0].Postcode%></p>
-          
-          <button onclick="useAddress('<%=i%>')" type="button" class="card-link btn btn-secondary">Use</button>
-          
-        </div>
-    </div>     
- <%}%>   -->
+      </div>    
+  <%}%>
 
     
     <div class="page-area cart-page spad">
@@ -110,20 +56,20 @@
               <h4 class="checkout-title">Billing Address</h4>
               <div class="row">
                 <div class="col-md-6">
-                  <input type="text" name="Firstname" placeholder="First Name *">
+                  <input type="text" name="Firstname" id="Firstname"  placeholder="First Name *">
                 </div>
                 <div class="col-md-6">
-                  <input type="text"  name="Lastname" placeholder="Last Name *">
+                  <input type="text"  name="Lastname" id="Lastname"  placeholder="Last Name *">
                 </div>
                 <div class="col-md-12">
               
                 
-                  <input type="text" name="Address"  placeholder="Address *">
-                  <input type="text" name="city" placeholder="city">
-                  <input type="text" name="Phone" placeholder="Phone no *">
-                  <input type="email" name="email" placeholder="Email Address *">
-                  <input type="text" name="landmark" placeholder="Landmark *">
-                  <input type="text" name="pincode" placeholder="Pincode *">
+                  <input type="text" name="Address" id="Address"  placeholder="Address *">
+                  <input type="text" name="city" id="city"  placeholder="city">
+                  <input type="text" name="Phone" id="Phone"  placeholder="Phone no *">
+                  <input type="email" name="email" id="email"  placeholder="Email Address *">
+                  <input type="text" name="landmark" id=" landmark"  placeholder="Landmark *">
+                  <input type="text" name="pincode" id="pincode"  placeholder="Pincode *">
                   <div class="checkbox-items">
                    
                 

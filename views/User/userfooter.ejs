@@ -275,6 +275,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     });
   }
 </script>
+<script>
+  function useAddress(index){
+    let Firstname = document.getElementById('Firstname'+index).textContent
+    document.getElementById('Firstname').value = Firstname
+    document.getElementById('Lastname').value =document.getElementById('Lastname'+index).textContent
+   
+    document.getElementById('Address').value = document.getElementById('Address'+index).textContent
+    document.getElementById('city').value = document.getElementById('city'+index).textContent
+    document.getElementById('Phone').value = document.getElementById('Phone'+index).textContent
+    document.getElementById('email').value = document.getElementById('email'+index).textContent
+    document.getElementById('landmark').value = document.getElementById('landmark'+index).textContent
+    document.getElementById('pincode').value = document.getElementById('pincode'+index).textContent
+
+  }
+</script>
 
 
 

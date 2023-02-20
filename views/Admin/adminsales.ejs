@@ -2,10 +2,10 @@
 <%- include('../Admin/adminHeader.ejs') %>
 
    
-  <div class="container">
-    <div class="row" style=>
-        <div class="col-md-4" style="width: 100%;">
-    <table class="table pt-5" >
+  <div class="container pt-5" >
+    <div class="row" style="margin: 10px;">
+        <div class="col-md-4" style="width: 100%; padding: 10px;">
+    <table id="example" class="table pt-5" >
         <thead>
             <tr>
                 <th>No</th>
@@ -35,17 +35,6 @@
     </div>
 </div>
 </div>
-<script>
-  $(document).ready(function() {
-  $('#example').DataTable( {
-      dom: 'Bfrtip',
-      buttons: [
-          'copy', 'csv', 'excel', 'pdf', 'print'
-      ]
-  } );
-} );
-</script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
@@ -55,5 +44,16 @@
 <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
 
+
+<script>
+    $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+</script>
    
    

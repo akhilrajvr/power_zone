@@ -22,20 +22,28 @@ let loginErr;
 let viewcart;
 
 module.exports = {
-  getUserLogin: (req, res) => {
-    res.render("User/login", { loginErr, user: req.session.user });
-    loginErr = null;
+  getUserLogin: (req, res,next) => {
+    try{
+      res.render("User/login", { loginErr, user: req.session.user });
+      loginErr = null;
+    }
+    catch(error){
+      next(error)
+
+    }
+
   },
 
-  getUserHome: async (req, res) => {
+  getUserHome: async (req, res,next) => {
     try {
       if (loggedIn) {
-        productModel.find({}, (err, result) => {
+        productModel.find({}, async(err, result) => {
           if (err) {
             console.log(err);
           } else {
             let user = req.session.user;
-            res.render("User/index", { user, result });
+           const bannerData = await bannerModel.find();
+            res.render("User/index", { user, result, bannerData});
           }
         });
       } else {
@@ -48,13 +56,19 @@ module.exports = {
           }
         });
       }
-    } catch {
-      res.redirect("/404");
+    } catch (error) {
+       next(error)
     }
   },
 
-  getUserSingnin: (req, res) => {
-    res.render("User/signup", { user: req.session.user });
+  getUserSingnin: (req, res, next) => {
+    try{
+      res.render("User/signup", { user: req.session.user });
+    }
+    catch(error){
+      next(error)
+    }
+    
   },
 
   postUserSignup: (req, res) => {
@@ -109,6 +123,7 @@ module.exports = {
     });
   },
   postUserloigin: async (req, res) => {
+        try{
     let user = await userModel.findOne({ email: req.body.email });
     if (user) {
       if (user.userStatus === "active") {
@@ -130,7 +145,13 @@ module.exports = {
       logginErr = "Invalied Email";
       res.redirect("/login");
     }
-  },
+  }
+  
+  catch(error){
+  next(error)
+  }
+}
+  ,
   getUserLogout: (req, res) => {
     req.session.destroy();
     res.redirect("/");
@@ -167,11 +188,17 @@ module.exports = {
     let user = req.session.user;
     res.render("User/usercontact", { user });
   },
-  getHome: (req, res) => {
-    let user = req.session.user;
-    res.render("User/index", { user });
+  getHome: (req, res,next) => {
+    try{
+      let user = req.session.user;
+     res.render("User/index", { user });
+    }catch(error){
+      next(error)
+    }
+   
   },
-  getUserShop: async (req, res) => {
+  getUserShop: async (req, res,next) => {
+    try{
     const categorys = await category.find();
     productModel.find({}, (err, result) => {
       if (err) {
@@ -182,8 +209,12 @@ module.exports = {
         res.render("User/usershop", { user, result, categorys });
       }
     });
+  }catch(error){
+    next(error)
+  }
   },
-  getuserCart: async (req, res) => {
+  getuserCart: async (req, res,next) => {
+    try{
     if (loggedIn) {
       let productId = req.params.id;
 
@@ -245,8 +276,12 @@ module.exports = {
     } else {
       res.redirect("/login");
     }
+  }catch(error){
+    next(error)
+  }
   },
-  getcart: async (req, res) => {
+  getcart: async (req, res,next) => {
+    try{
     if (loggedIn) {
       let userId = req.session.user._id;
       let viewcart = await cartModel
@@ -294,9 +329,14 @@ module.exports = {
     } else {
       res.redirect("/login");
     }
+  }catch(error){
+    next(error)
+  }
+  
   },
 
-  getProductdetails: (req, res) => {
+  getProductdetails: (req, res, next) => {
+    try{
     productModel.find({ _id: req.params.id }, (err, result) => {
       if (err) {
         console.log(err);
@@ -305,9 +345,13 @@ module.exports = {
         res.render("User/productdetails", { user, result });
       }
     });
+  }catch(error){
+    next(error)
+  }
   },
 
-  Postusercartinc: async (req, res) => {
+  Postusercartinc: async (req, res,next) => {
+    try{
     if (loggedIn) {
       const _id = req.params.id;
 
@@ -328,9 +372,13 @@ module.exports = {
         res.json({ error: true });
       }
     }
+  }catch(error){
+    next(error)
+  }
   },
 
-  postuserminues: async (req, res) => {
+  postuserminues: async (req, res,next) => {
+    try{
     if (loggedIn) {
       const _id = req.params.id;
       userId = req.session.user._id;
@@ -348,6 +396,9 @@ module.exports = {
         res.json({ error: true });
       }
     }
+  }catch(error){
+    next(error)
+  }
   },
   getcheckout: async (req, res, next) => {
     try {
@@ -381,7 +432,8 @@ module.exports = {
     }
   },
 
-  postAddaddress: async (req, res) => {
+  postAddaddress: async (req, res,next) => {
+    try{
     if (loggedIn) {
       let userId = req.session.user._id;
       if (req.body) {
@@ -405,8 +457,12 @@ module.exports = {
         }
       }
     }
+  }catch(error){
+    next(error)
+  }
   },
-  getwishlist: async (req, res) => {
+  getwishlist: async (req, res,next) => {
+    try{
     if (loggedIn) {
       let userId = req.session.user._id;
       let viewWishlist = await wishlistModel
@@ -425,8 +481,11 @@ module.exports = {
     } else {
       res.redirect("/login");
     }
+  }catch(error){
+    next (error)
+  }
   },
-  getAddtowishlist: async (req, res) => {
+  getAddtowishlist: async (req, res,next) => {
     try {
       if (loggedIn) {
         let productId = req.params.id;
@@ -476,7 +535,7 @@ module.exports = {
     }
   },
 
-  getdeletproduct: async (req, res) => {
+  getdeletproduct: async (req, res,next) => {
     try {
       if (loggedIn) {
         let userId = req.session.user;
@@ -529,7 +588,8 @@ module.exports = {
       next(error);
     }
   },
-  categoryfilter: async (req, res) => {
+  categoryfilter: async (req, res,next) => {
+    try{
     const categorys = await category.find();
     let categoryid = req.params.data;
     productModel.find({ category: categoryid }, (err, result) => {
@@ -541,6 +601,9 @@ module.exports = {
         res.render("User/usershop", { user, result, categorys });
       }
     });
+  }catch(error){
+    next (error)
+  }
   },
   getdeleteCart: async (req, res, next) => {
     try {
@@ -629,7 +692,8 @@ module.exports = {
   //  }
 
   // },
-  postCheckout: async (req, res) => {
+  postCheckout: async (req, res,next) => {
+    try{
     if (loggedIn) {
       let discount;
       let totalPrice = req.params.id;
@@ -738,9 +802,10 @@ module.exports = {
           key_id: "rzp_test_SN6n6I4ZbNE9FY",
           key_secret: "KMexa77VIzm8CQOyRvvqXsK4",
         });
-
+         
+         
         var options = {
-          amount: totalPrice * 100, // amount in the smallest currency unit
+          amount: finalTotal * 100, // amount in the smallest currency unit
           currency: "INR",
           receipt: "" + req.session.orderId,
         };
@@ -751,12 +816,14 @@ module.exports = {
     } else {
       res.redirect("/login");
     }
-    // } catch (error) {
-    //     next(error)
-    // }
+  }catch(error){
+    next(error)
+  }
+     
   },
 
-  postverifyPayment: async (req, res) => {
+  postverifyPayment: async (req, res,next) => {
+    try{
     console.log(req.body);
 
     if (loggedIn) {
@@ -785,6 +852,9 @@ module.exports = {
     } else {
       res.redirect("/login");
     }
+  }catch(error){
+    next(error)
+  }
   },
   getPlacedOrder: (req, res, next) => {
     try {
@@ -843,6 +913,7 @@ module.exports = {
                         let couponObj = {
                           discount: data[0].Percentage,
                           couponId: data[0]._id,
+                          
                         };
 
                         req.session.coupon = couponObj;
@@ -898,7 +969,7 @@ module.exports = {
     }
   },
 
-  postAddress: (req, res) => {
+  postAddress: (req, res,next) => {
     try {
       if (loggedIn) {
         let userId = req.session.user._id;
@@ -958,7 +1029,8 @@ module.exports = {
     
     
 },
-  getMyorders: async (req, res) => {
+  getMyorders: async (req, res,next) => {
+    try{
     if (loggedIn) {
       let userId = req.session.user._id;
       let vieworders = await orderModel
@@ -971,8 +1043,11 @@ module.exports = {
     } else {
       res.redirect("/login");
     }
+  }catch(error){
+    next(error)
+  }
   },
-  getCancelOrder: async (req, res) => {
+  getCancelOrder: async (req, res,next) => {
     try {
       if (loggedIn) {
         let orderId = req.params.id;

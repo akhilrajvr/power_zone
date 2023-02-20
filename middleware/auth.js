@@ -1,3 +1,4 @@
+
 module.exports = {
 
     adminSession: (req, res, next) => {
@@ -5,7 +6,7 @@ module.exports = {
             next()
         }
         else {
-            res.redirect('/admin')
+            res.redirect('/Admin')
         }
     },
 
@@ -20,3 +21,5 @@ module.exports = {
 
   
 };
+
+  

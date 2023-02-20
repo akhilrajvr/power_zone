@@ -5,20 +5,16 @@
         <div class="col-lg-4 " style="margin-left: 500px; margin-top: 200px;">
             <h3 style="display: flex; text-align: center; margin-left: 100px;">Edit Banner</h3>
 
-            <form class="frm-data" style="text-align: center;" method="post" action="/Admin/editbanner/<%=bannerData.id %>" enctype="multipart/form-data">
+            <form class="frm-data" style="text-align: center;" method="post" action="/admin/editbanner/<%=bannerData[0].id%>" enctype="multipart/form-data">
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Heading</label>
-                  <input type="text" class="form-control" id="name" value="<%-bannerData.Heading %>" name="Heading" aria-describedby="emailHelp">
+                  <label for="exampleInputEmail1" class="form-label">Section</label>
+                  <input type="text" class="form-control" id="name" value="<%=bannerData[0].Section%>                         
                  
                 </div>
+             
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Offer</label>
-                  <input type="text" class="form-control" id="stock"  name="offer" value="<%-bannerData.offer %>" aria-describedby="emailHelp">
-                 
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label"> More Image</label>
-                  <input type="file" id="moreimage" class="form-control"   multiple name="bannerimage" onchange="return fileValidation()" >
+                  <label for="exampleInputPassword1" class="form-label"> Upload Image</label>
+                  <input  class="form-control" name="bannerImg" id="formFileLg" type="file" multiple  >
                 </div>
            
                 <button type="submit" class="btn btn-primary">Save Banner</button>
@@ -27,29 +23,5 @@
     </div>
 </div> 
 
-<script>
-   
-  function fileValidation(){
-   var fileInput = document.getElementById('moreimage');
-   var filePath = fileInput.value;
-   var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-   if(!allowedExtensions.exec(filePath)){
-       // imageError
-       document.getElementById('imageError').innerHTML = "Please upload file having extensions .jpeg/.jpg/.png/.gif only"
-       fileInput.value = '';
-       return false;
-   }else{
-       //Image preview
-       if (fileInput.files && fileInput.files[0]) {
-           var reader = new FileReader();
-           reader.onload = function(e) {
-               document.getElementById('imageError').innerHTML = ""
-               document.getElementById('imagePreview').innerHTML = '<img src="'+e.target.result+'"/>';
-           };
-           reader.readAsDataURL(fileInput.files[0]);
-       }
-   }
-}
 
-</script>
 

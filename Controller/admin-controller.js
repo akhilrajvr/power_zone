@@ -76,7 +76,7 @@ module.exports={
                 result1.pendingOrders = pendingOrders
             }
             res.json(result1)
-            console.log(result1)
+        
         },
 
         getdashboardBar :async(req,res)=>{
@@ -136,7 +136,7 @@ module.exports={
             
     
             res.json(result)
-            console.log(result)
+           
         },
 
 
@@ -446,45 +446,29 @@ module.exports={
           getAddbanner:(req,res)=>{
             res.render('Admin/addbanner',{result:false})
           },
-          postAddbanner:async(req,res)=>{
-              try {
-               
-                if (req.body) {
-                
-                  
-                   if (req.files) {
-                 
-                    console.log("=========");
-                  let imagename =[]
-                    for(file of req.files){
-                        imagename.push(file.filename)
-                    }
-                      if (imagename) {
-                       const data = req.body
-                        data.bannerimage = imagename
-                        const bannerData = new bannerModel(data)
-                        console.log(bannerData);
-                         await bannerData.save()
-                          console.log(bannerData);
-                         res.redirect('/Admin/addbanner')
-                      } else {
-                         //   console.log("pleace add image");
-                      }
-                   } else {
-                      // console.log("pleace add image");
-                   }
-                } else {
-                   res.redirect('/Admin/adminerror')
-                }
-             } catch (error) {
-                console.log(error);
-                res.redirect('/Admin/adminerror')
-             }
-          },
+          postAddbanner:(req,res)=>{
+            
+            const imagename = []
+           for(file of req.files){
+              imagename.push(file.filename)
+        }
+           const bannerData = new bannerModel({
+                Section : req.body.Section,
+                bannerImg : imagename,
+                bannerStatus : "true"
+            })
+           
+              bannerData.save()
+           
+            res.render('Admin/addbanner')
+    
+    
+        },
 
           getAdminbannerList:async(req,res)=>{
              try{
                 let bannerlist=await bannerModel.find()
+                
                 if(bannerlist){
                     res.render('Admin/bannerlist',{bannerlist})
                 }else{
@@ -528,7 +512,6 @@ module.exports={
        
           getplacedOrders:async(req,res)=>{
             let orderId = req.params.id
-            console.log(orderId,'===========orderId=========');
             await orderModel.updateOne({_id:orderId},{
                 $set:{
                     paymentStatus : "Placed"
@@ -578,16 +561,18 @@ module.exports={
                 }
             })
         },
-        getAdminSales:async(req,res)=>{
-            orderModel.find({},(err,result)=>{
+        getAdminSales:async(req,res)=> {
+            orderModel.find({paymentStatus:"Delivered"},(err,result)=>{
+                
                 if(err){
                     console.log(err)
                 }else{
                     res.render('Admin/adminsales',{result})
                 }
             })
-             
         },
+    
+    
         getAdminHome:(req,res)=>{
             res.render('Admin/adminHome')
         },
@@ -611,38 +596,35 @@ module.exports={
                   
 
         getAdmineditbanner:async(req,res)=>{
-            try {
-                const _id = req.params?.id
-              
-                   const bannerData = await bannerModel.findOne({ _id })
-                   if (bannerData) {
-                 
-                      res.render('Admin/editbanner', { bannerData })
-                   }
-              
-             } catch (error) {
-                res.redirect('/Admin/adminerror')
-             }
-         } ,
+            bannerModel.find({_id:req.params.id},function(err,bannerData){
+                if(err){
+                    console.log('err')
+                }else{
+                    res.render('Admin/editbanner',{bannerData})
+                }
+            })
+        } ,
 
          
 
-        postEditbanner:async(req,res)=>{
-            try {
-                const _id = req.params.id
-                   const Data = req.body
-                   const image = req.file
-                   if (image) {
-                      Data.bannerimage = image.filename
-                   }
-                   await bannerModel.updateOne({_id},{
-                    $set:Data
-                })
-                   res.redirect('/Admin/adminbannerlist')
-              
-             } catch (error) {
-                res.redirect('/Admin/adminerror')
-             }
+        postEditbanner:(req,res)=>{
+            const imagename = []
+            for(file of req.files){
+                imagename.push(file.filename)
+            }
+            bannerModel.find({_id:req.params.id},async(err,data)=>{
+                if(data.length!==0){
+                    await bannerModel.updateOne({_id:req.params.id},{
+                        $set:{
+                            Section:req.body.Section,
+                            bannerImg:imagename
+                        }
+                    })
+                    res.redirect('/Admin/addbanner')
+                }else{
+                    console.log(err)
+                }
+            })
         }
      
 

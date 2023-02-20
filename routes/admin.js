@@ -3,73 +3,74 @@ const storageImg = require('../multer/multer')
 const adminRouter=require('../Controller/admin-controller')
 const router=express.Router()
 const bannerImg=require('../multer/addbanner-multer')
-const adminsession = require('../middleware/auth')
+const adminSession = require('../middleware/auth')
 
 
 
-router.get('/',adminRouter.getAdminLogin)
+router.get('/', adminRouter.getAdminLogin)
 
-router.get('/adminhome', adminsession.adminSession,adminRouter.getAdminHome)
+router.get('/adminhome',adminSession.adminSession, adminRouter.getAdminHome)
 
-router.get('/getdashboarddetails',adminRouter.getdashboardDetails)
+router.get('/getdashboarddetails',adminSession.adminSession,adminRouter.getdashboardDetails)
 
-router.get('/dashboardBar',adminRouter.getdashboardBar)
+router.get('/dashboardBar',adminSession.adminSession,adminRouter.getdashboardBar)
 
 router.post('/adminlogin',adminRouter.PostAdminlogin)
 
 router.get('/adminlogut',adminRouter.getAdminlogout)
 
 // router.get('/adminusers',adminRouter.getAdminusers)
-router.get('/adminusers',adminRouter.getAllusers)
+router.get('/adminusers',adminSession.adminSession,adminRouter.getAllusers)
 
 router.get('/userblock/:id',adminRouter.getuserblock)
 
 router.get('/userUnblock/:id',adminRouter.getuserUnblock)
 
 // router.get('/admincategory',adminRouter.getAdmincategory)
-router.get('/admincategory',adminRouter.getAllcategory)
+router.get('/admincategory',adminSession.adminSession,adminRouter.getAllcategory)
 
-router.post ('/addcategory',adminRouter.postAddcategory)
+router.post ('/addcategory',adminSession.adminSession,adminRouter.postAddcategory)
 
-router.get('/adminproduct', adminsession.adminSession,adminRouter.getAdminproduct)
+router.get('/adminproduct',adminSession.adminSession,adminRouter.getAdminproduct)
 
-router.get('/addproduct', adminRouter.getAddproduct)
+router.get('/addproduct', adminSession.adminSession, adminRouter.getAddproduct)
 
 router.post('/addproduct',storageImg.array("productImg",3),adminRouter.postAddProduct)
 
-router.get('/categoryproduct/:category',adminsession.adminSession,adminRouter.getcategoryproduct)
+router.get('/categoryproduct/:category',adminSession.adminSession,adminRouter.getcategoryproduct)
 
-router.get('/deletecategory/:category',adminsession.adminSession,adminRouter.getDeleteCategory)
+router.get('/deletecategory/:category',adminRouter.getDeleteCategory)
 
-router.get('/editproduct/:id',adminRouter.getEditproduct)
+router.get('/editproduct/:id',adminSession.adminSession,adminRouter.getEditproduct)
 
 router.post('/editproduct/:id',storageImg.array("productImg",2),adminRouter.postEditProduct)
 
-router.get('/softdeleteproduct/:id',adminRouter.getSoftDeleteProduct)
+router.get('/softdeleteproduct/:id',adminSession.adminSession,adminRouter.getSoftDeleteProduct)
 
-router.get('/undosoftdeleteproduct/:id',adminRouter.getUndoSoftDeleteProduct)
+router.get('/undosoftdeleteproduct/:id',adminSession.adminSession,adminRouter.getUndoSoftDeleteProduct)
 
 // router.get('/deleteproduct/:id',adminRouter.getdeleteProduct)
 
-  router.get('/addcoupon',adminsession.adminSession,adminRouter .getAddCuopon)
+  router.get('/addcoupon',adminSession.adminSession,adminRouter .getAddCuopon)
 
   router.post('/addpostcuopon',adminRouter.postaddcuopon)
 
- router.get('/admincoupon',adminRouter.getcouponlist)
+ router.get('/admincoupon',adminSession.adminSession,adminRouter.getcouponlist)
 
- router.get('/editcoupon/:id',adminRouter.geteditcoupon)
+ router.get('/editcoupon/:id',adminSession.adminSession,adminRouter.geteditcoupon)
 
  router.post('/editcoupon/:id',adminRouter.editcoupon)
 
- router.get('/deletecoupon/:id',adminRouter.getdeletecoupon)
+ router.get('/deletecoupon/:id',adminSession.adminSession,adminRouter.getdeletecoupon)
 
- router.get('/addbanner',adminsession.adminSession,adminRouter.getAddbanner)
+ router.get('/addbanner',adminSession.adminSession,adminRouter.getAddbanner)
  
- router.post('/addbanner',bannerImg.array("bannerimage",2),adminRouter.postAddbanner)
-  
- router.post('/editbanner/:id',bannerImg.array("bannerimage",2),adminRouter.postEditbanner)
+ router.post('/addbanner',storageImg.array("bannerImg",3),adminRouter.postAddbanner)
 
- router .get('/vieworder/:id',adminsession.adminSession,adminRouter.getOrders)
+  
+ router.post('/editbanner/:id',storageImg.array("bannerImg",3),adminRouter.postEditbanner)
+
+ router .get('/vieworder/:id',adminRouter.getOrders)
 
  router.get('/placeOrder/:id',adminRouter.getplacedOrders)
 
@@ -79,19 +80,27 @@ router.get('/cancelledOrder/:id',adminRouter.getcancelledOrders)
 
 router.get('/deliveredOrder/:id',adminRouter.getdeliveredOrders)
 
-router.get('/adminorders',adminsession.adminSession,adminRouter.getadminorders)
+router.get('/adminorders',adminSession.adminSession,adminRouter.getadminorders)
 
- router.get('/adminsales',adminsession.adminSession,adminRouter.getAdminSales)
+ router.get('/adminsales',adminSession.adminSession,adminRouter.getAdminSales)
 
-  router.get('/adminhome',adminRouter.getAdminHome)
+  router.get('/adminhome',adminSession.adminSession,adminRouter.getAdminHome)
 
- router.get('/adminbannerlist',adminRouter.getAdminbannerList)
+ router.get('/adminbannerlist',adminSession.adminSession,adminRouter.getAdminbannerList)
  
- router.get('/adminerror',adminRouter.getAdminerror)
+ router.get('/adminerror',adminSession.adminSession,adminRouter.getAdminerror)
 
- router.get('/editbanner/:id',adminRouter.getAdmineditbanner)
-
-//  router.get('/softdeletebanner/:id',adminRouter.getSoftDeleteBanner)
+ router.get('/editbanner/:id',adminSession.adminSession, adminRouter.getAdmineditbanner)
 
  router.get('/undosoftdeletebanner/:id',adminRouter.getUndoSoftDeleteBanner)
+
+ router.use(function (req, res, next) {
+  next(createError(404));
+})
+
+router.use(function (err, req, res, next) {
+  res.status(err.status || 404);
+  res.render('Admin/adminerror');
+})
+
 module.exports=router;

@@ -1,20 +1,20 @@
 const mongoose = require('mongoose')
-const { array } = require('../multer/multer')
+
 const Schema = mongoose.Schema
 
-const banner = new Schema({
-    Heading:{
+let bannerSchema = new Schema ({
+    Section:{
         type:String,
         required:true
     },
-    offer:{
-        type:Number,
-        required:true 
-    },
-    bannerimage:{
+    bannerImg:{
         type:Array,
-        required:true 
+        required:true
+    },
+    bannerStatus : {
+        type:Boolean,
+        required:true
     }
 })
 
-module.exports = mongoose.model('banner',banner)
+module.exports = mongoose.model('banner',bannerSchema)

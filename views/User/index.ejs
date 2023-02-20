@@ -4,22 +4,27 @@
 	<%- include('../User/layout.ejs') %>
 	<%- include('../User/userheader.ejs') %>
 	
+
+
+
 <!-- Hero section -->
 
- <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-	<% bannerData.forEach(bannerData=> { %>
-	<div class="carousel-inner">
-	  <div class="carousel-item active">
-		<img src="/images/<%=bannerData.bannerimage %>" class="d-block w-100" alt="...">
-	  </div>
+<section class="hero-section set-bg" >
+	<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+		<%  bannerData.forEach(bannerData=> { %>
+		<div class="carousel-inner">
+		  <div class="carousel-item active">
+			<img src="/images/<%= bannerData.bannerImg %>" class="d-block w-100" alt="...">
+		  </div>
+		
+		
+		</div>
+		<% }); %>
+	  </div> 
+
 	
-	</div>
-	<% }); %>
-  </div> 
-
-
-
-<!--- Hero section end -->
+</section>
+<!-- - Hero section end -->
 
 	
 	<!-- Intro section -->
@@ -61,11 +66,6 @@
 
 	<!-- Product section -->
 	
-
-
-	
-
-
 	<section class="product-section spad">
 		<div class="container">
 			<ul class="product-filter controls">
@@ -81,10 +81,14 @@
 						<figure>
 							<img src="images/<%=result.productImg[0]%>" class="img-product p-3"  alt="">
 							<div class="pi-meta">
+							</a href="/productdetails">
 								<div class="pi-m-left">
-									<img src="/User/img/icons/eye.png" alt="" href="/productdetails">
+								
+									<img src="/User/img/icons/eye.png" alt="" >
 									<p>quick view</p>
+								  
 								</div>
+							</a>
 								
 								<div class="pi-m-right">
 									<img src="/User/img/icons/heart.png" alt=""  onclick="wishlist('<%=result.id%>')">
@@ -107,59 +111,10 @@
 		</div>
 	</section>
 	
-
-							
-	
-
 	<!-- Product section end -->
 
 
-	<!-- Blog section -->	
-	<!-- <section class="blog-section spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-5">
-					<div class="featured-item">
-						<img src="/User/img/featured/featured-3.jpg" alt="">
-						<a href="#" class="site-btn">see more</a>
-					</div>
-				</div>
-				<div class="col-lg-7">
-					<h4 class="bgs-title">from the blog</h4>
-					<div class="blog-item">
-						<div class="bi-thumb">
-							<img src="/User/img/blog-thumb/1.jpg" alt="">
-						</div>
-						<div class="bi-content">
-							<h5>10 tips to dress like a queen</h5>
-							<div class="bi-meta">July 02, 2018   |   By maria deloreen</div>
-							<a href="#" class="readmore">Read More</a>
-						</div>
-					</div>
-					<div class="blog-item">
-						<div class="bi-thumb">
-							<img src="/User/img/blog-thumb/2.jpg" alt="">
-						</div>
-						<div class="bi-content">
-							<h5>Fashion Outlet products</h5>
-							<div class="bi-meta">July 02, 2018   |   By Jessica Smith</div>
-							<a href="#" class="readmore">Read More</a>
-						</div>
-					</div>
-					<div class="blog-item">
-						<div class="bi-thumb">
-							<img src="/User/img/blog-thumb/3.jpg" alt="">
-						</div>
-						<div class="bi-content">
-							<h5>the little black dress just for you</h5>
-							<div class="bi-meta">July 02, 2018   |   By maria deloreen</div>
-							<a href="#" class="readmore">Read More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
+	
 
 
 
